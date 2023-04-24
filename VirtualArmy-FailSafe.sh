@@ -3,6 +3,10 @@
 # purpose: Redundancy. Because, what's more frustrating? Having a machine attacked? 
 # or being unable to determine why the tango hasn't lost any progress and won't seem to stay down?
 
+# this script pulls names of VMs from the virtual army script and starts the next VM in the virtual VM army
+# list at the last location the user was at. Ie in the event of a crash or unexpected VM stop, it will allow
+# a user to essentially "pick up where they left off" in the last VM. Creating another form of data redundancy.
+
 # Define variables for the virtual servers and devices
 echo "Welcome to the virtual server and device spin-up script!"
 echo "Please enter the name for your virtual server and device: "
