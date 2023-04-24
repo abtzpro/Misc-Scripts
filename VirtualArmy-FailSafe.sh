@@ -1,15 +1,17 @@
+#!/bin/bash
+
 # Define variables for the virtual servers and devices
 echo "Welcome to the slave-master data redundancy backup setup script!"
 echo "Please enter the name for your master virtual server: "
-read master_name
+read -r master_name
 echo "Please enter the name for your slave virtual server: "
-read slave_name
+read -r slave_name
 echo "Please enter the operating system for your virtual servers: "
-read vm_os
+read -r vm_os
 echo "Please enter the number of CPUs for your virtual servers: "
-read vm_cpu
+read -r vm_cpu
 echo "Please enter the amount of RAM for your virtual servers (in MB): "
-read vm_ram
+read -r vm_ram
 
 # Define the array of VM names
 vms=("$master_name" "$slave_name")
@@ -17,8 +19,8 @@ vms=("$master_name" "$slave_name")
 # Define functions to create, start, stop, and delete virtual machines
 create_vm() {
   echo "Creating virtual machine $1 with $vm_cpu CPUs, $vm_ram MB of RAM, and $vm_os operating system..."
-  VBoxManage createvm --name "$1" --ostype $vm_os --register
-  VBoxManage modifyvm "$1" --cpus $vm_cpu --memory $vm_ram --boot1 dvd --boot2 disk --boot3 none --boot4 none
+  VBoxManage createvm --name "$1" --ostype "$vm_os" --register
+  VBoxManage modifyvm "$1" --cpus "$vm_cpu" --memory "$vm_ram" --boot1 dvd --boot2 disk --boot3 none --boot4 none
 }
 
 start_vm() {
@@ -47,9 +49,9 @@ do
   echo "4. Delete virtual machines"
   echo "5. Exit"
 
-  read choice
+  read -r choice
 
-  case $choice in
+  case "$choice" in
     1)
       create_vm "$master_name"
       vms+=("$master_name")
@@ -85,5 +87,5 @@ do
       *)
       echo "Invalid option. Please try again."
       ;;
-      esac
-      done
+  esac
+done
