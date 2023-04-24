@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# purpose: Redundancy. Because, what's more frustrating? Having a machine attacked?
+# purpose: Redundancy. Because, what's more frustrating? Having a machine attacked? 
 # or being unable to determine why the tango hasn't lost any progress and won't seem to stay down?
 
 # this script pulls names of VMs from the virtual army script and starts the next VM in the virtual VM army
 # list at the last location the user was at. Ie in the event of a crash or unexpected VM stop, it will allow
 # a user to essentially "pick up where they left off" in the last VM. Creating another form of data redundancy.
-# the old VM is then destroyed. This tactic can be especially useful in the event a malicious threat actor has
-# eyes and ears on a high priority developer or Enterpise asset, whom is consistently targeting their work and
+# the old VM is then destroyed. This tactic can be especially useful in the event a malicious threat actor has 
+# eyes and ears on a high priority developer or Enterpise asset, whom is consistently targeting their work and 
 # efforts with the attempt to hinder or corrupt progress such as if a competitor company hired a threat actor.
 
 # Define variables for the virtual servers and devices
@@ -23,10 +23,6 @@ read vm_ram
 
 # Define the array of VM names
 vms=("Windows VM 1" "Windows VM 2" "Windows VM 3")
-
-# Define the master and slave VMs
-master_vm=${vms[0]}
-slave_vms=("${vms[@]:1}")
 
 # Define functions to create, start, stop, and delete virtual machines
 create_vm() {
@@ -59,8 +55,7 @@ do
   echo "2. Start virtual machine"
   echo "3. Stop virtual machine"
   echo "4. Delete virtual machine"
-  echo "5. Switch to another virtual machine"
-  echo "6. Exit"
+  echo "5. Exit"
 
   read choice
 
@@ -73,7 +68,7 @@ do
         echo "Please enter a name for virtual machine $i:"
         read vm_name
         create_vm "$vm_name"
-        slave_vms+=("$vm_name")
+        vms+=("$vm_name")
       done
       ;;
     2)
@@ -81,4 +76,35 @@ do
       for ((i=0; i<${#vms[@]}; i++))
       do
         echo "$((i+1)). ${vms[$i]}"
-     
+      done
+      read index
+      start_vm "${vms[$((index-1))]}"
+      ;;
+    3)
+      echo "Which virtual machine do you want to stop?"
+      for ((i=0; i<${#vms[@]}; i++))
+      do
+        echo "$((i+1)). ${vms[$i]}"
+      done
+      read index
+      stop_vm "${vms[$((index-1))]}"
+      ;;
+    4)
+      echo "Which virtual machine do you want to delete?"
+      for ((i=0; i<${#vms[@]}; i++))
+      do
+        echo "$((i+1)). ${vms[$i]}"
+      done
+      read index
+      delete_vm "${vms[$((index-1))]}"
+      vms=("${vms[@]:0:$((index-1))}" "${vms[@]:$index -1]}")
+;;
+5)
+echo "Exiting script..."
+exit 0
+;;
+*)
+echo "Invalid option. Please try again."
+;;
+esac
+done
