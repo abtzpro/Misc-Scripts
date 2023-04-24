@@ -6,6 +6,9 @@
 # this script pulls names of VMs from the virtual army script and starts the next VM in the virtual VM army
 # list at the last location the user was at. Ie in the event of a crash or unexpected VM stop, it will allow
 # a user to essentially "pick up where they left off" in the last VM. Creating another form of data redundancy.
+# the old VM is then destroyed. This tactic can be especially useful in the event a malicious threat actor has 
+# eyes and ears on a high priority developer or Enterpise asset, whom is consistently targeting their work and 
+# efforts with the attempt to hinder or corrupt progress such as if a competitor company hired a threat actor.
 
 # Define variables for the virtual servers and devices
 echo "Welcome to the virtual server and device spin-up script!"
