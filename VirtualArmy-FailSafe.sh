@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# purpose: redundancy. Because whats more frustrating? Having a machine attacked and losing your work or being unabke to degermine why the tango hasnt lost any progress and wont seem to stay down?
 # Define variables for the virtual servers and devices
 echo "Welcome to the virtual server and device spin-up script!"
 echo "Please enter the name for your virtual server and device: "
