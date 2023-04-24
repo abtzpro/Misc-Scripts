@@ -82,3 +82,8 @@ do
       echo "Exiting script..."
       exit 0
       ;;
+      *)
+      echo "Invalid option. Please try again."
+      ;;
+    esac
+     done
