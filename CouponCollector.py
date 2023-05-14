@@ -1,3 +1,5 @@
+# This python script was created by Adam Rivers to perform the function of scraping coupon websites that allow scraping, for coupon codes and then saving the coupon codes for later use in a text file 
+
 import requests
 from bs4 import BeautifulSoup
 from colorama import Fore, Style
