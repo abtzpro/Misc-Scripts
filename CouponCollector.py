@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from colorama import Fore, Style
 
+# Remember to update this portion of the script pre-run. Populate the following: discount_websites function with your chosen discount code websites 
+
 discount_websites = [
     "https://www.example1.com",
     "https://www.example2.com",
@@ -16,7 +18,8 @@ def scrape_discount_codes(url):
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        # Adjust the scraping logic based on the website structure
+        # Adjust the scraping logic based on the website structure - ie if the website uses a nested function or javascript etc. 
+        # I have left this blank for now as it will change greatly with each site and is improbable to account for each change.
         # ...
 
     except (requests.RequestException, ValueError, KeyError) as e:
